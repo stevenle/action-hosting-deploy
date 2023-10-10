@@ -155,8 +155,16 @@ export async function deployProductionSite(
 ) {
   const { projectId, target, firebaseToolsVersion } = productionDeployConfig;
 
+  // NOTE(stevenle): to support gcf deployments, the `--only` flag is removed,
+  // the command `firebase deploy` is used instead.
+  // const deploymentText = await execWithCredentials(
+  //   ["deploy", "--only", `hosting${target ? ":" + target : ""}`],
+  //   projectId,
+  //   gacFilename,
+  //   { firebaseToolsVersion }
+  // );
   const deploymentText = await execWithCredentials(
-    ["deploy", "--only", `hosting${target ? ":" + target : ""}`],
+    ["deploy"],
     projectId,
     gacFilename,
     { firebaseToolsVersion }
